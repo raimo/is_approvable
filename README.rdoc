@@ -10,35 +10,35 @@ data needs to be moderated.
 
 Ensure you have field 'approved' in a model. Then you can add is_approvable to the model:
 
-class Post < ActiveRecord::Base
-  is_approvable
-end
+  class Post < ActiveRecord::Base
+    is_approvable
+  end
 
 
 By default, the report is sent with the content of fields 'id' and
 'created_at'. This can be changed by specifying the fields:
 
-class Post < ActiveRecord::Base
-  is_approvable :title, :body, :writer_name
-end
+  class Post < ActiveRecord::Base
+    is_approvable :title, :body, :writer_name
+  end
 
 To make the links of the email working, add approves_models to the corresponding controller:
 
-class PostsController < ApplicationController
-  approves_models
-end
+  class PostsController < ApplicationController
+    approves_models
+  end
 
 And routes to config/routes.rb:
 
-ActionController::Routing::Routes.draw do |map|
-  # Old lines..
-  # Add 'approve' and 'unapprove' actions.
-  map.resources :posts, :member => { :approve => :get, :unapprove => :get }
-end
+  ActionController::Routing::Routes.draw do |map|
+    # Old lines..
+    # Add 'approve' and 'unapprove' actions.
+    map.resources :posts, :member => { :approve => :get, :unapprove => :get }
+  end
 
 Then set recipients in config/environments/production.rb
 
-IsApprovable::ActivityMailer.activity_recipients = %w(recipient1@example.com recipient2@example.com)
+  IsApprovable::ActivityMailer.activity_recipients = %w(recipient1@example.com recipient2@example.com)
 
 Now restart Rails and everything should be ready.
 
