@@ -32,9 +32,9 @@ end
 And routes to config/routes.rb:
 <pre>
 ActionController::Routing::Routes.draw do |map|
-  ## Old lines..
+  # Old lines..
 
-  ## Add :approve and :unapprove actions.
+  # Add :approve and :unapprove actions.
   map.resources :posts, :member => { :approve => :get, :unapprove => :get }
 end
 </pre>
