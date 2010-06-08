@@ -1,5 +1,7 @@
 = is_approvable
 
+Approve unauthenticated record updates from email links.
+
 == What is this?
 
 This Rails plugin sends email reports about new records created in a database.
