@@ -31,11 +31,11 @@ module ApprovesModels
 
   module InstanceMethods
     def approve
-      eval(params[:controller].classify).find(params[:id]).update_attribute(:approved, true)
+      Kernel.const_get(params[:controller].classify).find(params[:id]).update_attribute(:approved, true)
       redirect_to '/'
     end
     def unapprove
-      eval(params[:controller].classify).find(params[:id]).update_attribute(:approved, false)
+      Kernel.const_get(params[:controller].classify).find(params[:id]).update_attribute(:approved, false)
       redirect_to '/'
     end
   end
