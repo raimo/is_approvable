@@ -1,0 +1,10 @@
+Hyväksyttävät kentät:
+<% @reported_fields.each do |field| -%>
+<%= field -%>: <%= @model.send(field) %>
+<% end %>
+
+Klikkaa tätä hyväksyäksesi: <%= @url %>
+
+Klikkaa tätä peruaksesi hyväksymisen: <%= @url.gsub('approve', 'unapprove') %>
+
+- leet@korjaa.mobi
