@@ -17,7 +17,7 @@ module IsApprovable
     end
 
     def deliver_approval_application
-      ActivityNotifier.deliver_application_for_approval(self)
+      RecordApprovalMailer.deliver_application_for_approval(self)
     end
   end
 
