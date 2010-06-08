@@ -24,10 +24,10 @@ By default, the report is sent with the content of fields 'id' and
     is_approvable :title, :body, :writer_name
   end
 
-To make the links of the email working, add approves_models to the corresponding controller:
+To make the links of the email working, add approves_model (takes optional Model parameter) to the corresponding controller:
 
   class PostsController < ApplicationController
-    approves_models
+    approves_model
   end
 
 And routes to config/routes.rb:
