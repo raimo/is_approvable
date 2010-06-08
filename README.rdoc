@@ -40,7 +40,7 @@ And routes to config/routes.rb:
 
 Then set recipients in config/environments/production.rb
 
-  IsApprovable::ActivityMailer.activity_recipients = %w(recipient1@example.com recipient2@example.com)
+  RecordApprovalMailer.activity_recipients = %w(recipient1@example.com recipient2@example.com)
 
 Now restart Rails and everything should be ready.
 
