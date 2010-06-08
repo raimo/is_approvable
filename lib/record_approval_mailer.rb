@@ -1,4 +1,4 @@
-class RecordApprovalNotifier < ActionMailer::Base
+class RecordApprovalMailer < ActionMailer::Base
   def self.activity_recipients=(recipients)
     @@activity_recipients = recipients
   end
