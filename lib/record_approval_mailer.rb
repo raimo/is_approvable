@@ -10,7 +10,7 @@ class RecordApprovalMailer < ActionMailer::Base
     recipients @@activity_recipients
     sent_on    Time.now
 
-    body       :url => url_for(:controller => model.class.name.to_s.underscore.pluralize, :action => :approve, :id => model.to_param),
+    body       :url => url_for(:locale => I18n.locale, :controller => model.class.name.to_s.underscore.pluralize, :action => :approve, :id => model.to_param),
                :model => model, :reported_fields => model.class.reported_fields_on_approval
 
   end
