@@ -8,11 +8,11 @@ This Rails plugin sends email reports about new records created in a database.
 It is good for situations where records are created by public users and the
 data needs to be moderated.
 
-=== Installation
+== Installation
 
   script/plugin install git://github.com/raimo-t/is_approvable.git
 
-=== Usage
+== Usage
 
 Ensure you have field 'approved' in a model. Then you can add is_approvable to the model:
 
