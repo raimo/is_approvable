@@ -10,7 +10,10 @@ data needs to be moderated.
 
 == Installation
 
+=== Rails 2.3
   script/plugin install git://github.com/raimo-t/is_approvable.git
+=== Rails 3
+  rails plugin install git://github.com/raimo-t/is_approvable.git
 
 == Usage
 
@@ -34,7 +37,7 @@ To make the links of the email working, add approves_model (takes optional Model
     approves_model
   end
 
-And routes to config/routes.rb:
+And routes to config/routes.rb (Rails 2):
 
   ActionController::Routing::Routes.draw do |map|
     # Old lines..
@@ -42,7 +45,20 @@ And routes to config/routes.rb:
     map.resources :posts, :member => { :approve => :get, :unapprove => :get }
   end
 
-Then set recipients in config/environments/production.rb
+Or in Rails3:
+
+YourApplicationName::Application.routes.draw do
+  # Old lines..
+  # Add 'approve' and 'unapprove' actions.
+  resources :posts do
+    member do
+      get :approve
+      get :unapprove
+    end
+  end
+end
+
+Then set recipients in config/initializers/approvers.rb
 
   RecordApprovalMailer.activity_recipients = %w(recipient1@example.com recipient2@example.com)
 
