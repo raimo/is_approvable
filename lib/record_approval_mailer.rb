@@ -2,6 +2,9 @@ class RecordApprovalMailer < ActionMailer::Base
   def self.activity_recipients=(recipients)
     @@activity_recipients = recipients
   end
+  def self.root_path=(application_root)
+    @@root_path = application_root 
+  end
 
   self.template_root = "#{File.dirname(__FILE__)}/../views"
 
@@ -10,7 +13,7 @@ class RecordApprovalMailer < ActionMailer::Base
     recipients @@activity_recipients
     sent_on    Time.now
 
-    body       :url => url_for(:locale => I18n.locale.to_s, :controller => model.class.name.to_s.underscore.pluralize, :action => :approve, :id => model.to_param),
+    body       :url => @@root_path + url_for(:only_path => true, :controller => model.class.name.to_s.underscore.pluralize, :action => :approve, :id => model.to_param),
                :model => model, :reported_fields => model.class.reported_fields_on_approval
 
   end

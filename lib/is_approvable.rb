@@ -14,6 +14,7 @@ module IsApprovable
   module InstanceMethods
     def self.included(base)
       base.send(:after_create, :deliver_approval_application)
+      base.send(:named_scope, :approved, { :approved => true })
     end
 
     def deliver_approval_application
@@ -26,18 +27,29 @@ ActiveRecord::Base.send(:extend, IsApprovable)
 
 module ApprovesModels
   def approves_model(model_class=nil)
-    @approvable_model_class = model_class || Kernel.const_get(self.name.classify)
+    define_method(:approvable_model_class) do
+      (model_class || Kernel.const_get(params[:controller].classify))
+    end
     include InstanceMethods
   end
 
   module InstanceMethods
+    def self.included(base)
+      base.send(:before_filter, :set_the_current_request_host)
+    end
+
     def approve
-      @@approvable_model_class.find(params[:id]).update_attribute(:approved, true)
+      approvable_model_class.find(params[:id]).update_attribute(:approved, true)
       redirect_to '/'
     end
     def unapprove
-      @@approvable_model_class.find(params[:controller].classify).find(params[:id]).update_attribute(:approved, false)
+      approvable_model_class.find(params[:id]).update_attribute(:approved, false)
       redirect_to '/'
+    end
+
+    private
+    def set_the_current_request_host
+      RecordApprovalMailer.root_path = root_url.gsub(/\/$/,'')
     end
   end
 
