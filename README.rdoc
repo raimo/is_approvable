@@ -11,9 +11,9 @@ data needs to be moderated.
 == Installation
 
 === Rails 2.3
-  script/plugin install git://github.com/raimo-t/is_approvable.git
+  script/plugin install git://github.com/raimo/is_approvable.git
 === Rails 3
-  rails plugin install git://github.com/raimo-t/is_approvable.git
+  rails plugin install git://github.com/raimo/is_approvable.git
 
 == Usage
 
