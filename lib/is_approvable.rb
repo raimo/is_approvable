@@ -14,11 +14,11 @@ module IsApprovable
   module InstanceMethods
     def self.included(base)
       base.send(:after_create, :deliver_approval_application)
-      base.send(:named_scope, :approved, { :approved => true })
+      base.send(:scope, :approved, { :approved => true })
     end
 
     def deliver_approval_application
-      RecordApprovalMailer.deliver_application_for_approval(self)
+      RecordApprovalMailer.application_for_approval(self).deliver
     end
   end
 
