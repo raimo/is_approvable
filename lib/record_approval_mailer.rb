@@ -1,4 +1,7 @@
 class RecordApprovalMailer < ActionMailer::Base
+  def self.from=(address)
+    @@from = address
+  end
   def self.activity_recipients=(recipients)
     @@activity_recipients = recipients
   end
@@ -9,6 +12,7 @@ class RecordApprovalMailer < ActionMailer::Base
   self.prepend_view_path("#{File.dirname(__FILE__)}/../views")
 
   def application_for_approval(model)
+    from       @@from
     subject    "New #{model.class.name} record needs a confirmation"
     recipients @@activity_recipients
     sent_on    Time.now
